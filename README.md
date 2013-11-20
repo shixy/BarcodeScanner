@@ -5,11 +5,11 @@ phonegap android plugin 条码/二维码扫描解码
 
 安装
 ===
-1. 复制client中内容到project相对应的目录
+1. 复制client中内容到project相对应的目录(根据错误进行修复)
 2. 在project的res/xml/config.xml中添加
     ```
     <feature name="BarcodeScanner">
-        <param name="android-package" value="com.jingle.zxing.plugin.BarcodeScanner"/>
+        <param name="android-package" value="com.google.zxing.client.android.plugin.BarcodeScanner"/>
     </feature>
     ```
 
@@ -26,11 +26,10 @@ phonegap android plugin 条码/二维码扫描解码
 js中调用方法
     
     /**
-     * @param mode  
-     * one 只扫描一维码
-     * qr  只扫描二维码
-     * all 扫描所有支持的码
-     */
+	 * 条码/二维码扫描
+	 * @mode  PRODUCT_MODE(产品注册码) | ONE_D_MODE(一维码) | QR_CODE_MODE(二维码) | DATA_MATRIX_MODE (DM码)| ''(扫描所有支持的类型)
+	 *  
+	 */
     window.plugins.barcodeScanner(mode,function(result){
         //success
         //result.text  条码值

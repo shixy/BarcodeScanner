@@ -9,7 +9,7 @@
            android:layout_height="fill_parent"
            android:layout_gravity="center" />
 
-       <com.jingle.zxing.view.ViewfinderView
+       <com.google.zxing.client.android.ViewfinderView
            android:id="@+id/viewfinder_view"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content" />

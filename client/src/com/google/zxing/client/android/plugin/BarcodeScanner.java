@@ -6,7 +6,7 @@
  * Copyright (c) 2011, IBM Corporation
  */
 
-package com.jingle.zxing.plugin;
+package com.google.zxing.client.android.plugin;
 
 import org.apache.cordova.api.CallbackContext;
 import org.apache.cordova.api.CordovaPlugin;
@@ -17,7 +17,8 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.jingle.zxing.decoding.CaptureActivity;
+import com.google.zxing.client.android.CaptureActivity;
+import com.google.zxing.client.android.Intents;
 
 /**
  * This calls out to the ZXing barcode reader and returns the result.
@@ -57,7 +58,7 @@ public class BarcodeScanner extends CordovaPlugin {
         this.cbContext = callbackContext;
     	
         if (action.equals(SCAN)) {
-        	String mode = All_MODE;
+        	String mode = "";
         	if(args.length()>0){
         		try {
 					mode = args.getString(0);
@@ -65,7 +66,6 @@ public class BarcodeScanner extends CordovaPlugin {
 					e.printStackTrace();
 				}
         	}
-        	mode = ONE_MODE;
         	scan(mode);
         	
         } else {
@@ -79,12 +79,15 @@ public class BarcodeScanner extends CordovaPlugin {
 
 	 /**
      * Starts an intent to scan and decode a barcode.
+     * @param mode  PRODUCT_MODE | ONE_D_MODE | QR_CODE_MODE | DATA_MATRIX_MODE 
      */
     public void scan(String mode) {
     	Intent intentScan = new Intent();
     	intentScan.setClass(this.cordova.getActivity(), CaptureActivity.class);
     	intentScan.addCategory(Intent.CATEGORY_DEFAULT);
-    	intentScan.putExtra(MODE, mode);
+    	if(!mode.equals("")){
+    		intentScan.putExtra(Intents.Scan.MODE, mode);
+    	}
 
         this.cordova.startActivityForResult((CordovaPlugin) this, intentScan, REQUEST_CODE);
     }

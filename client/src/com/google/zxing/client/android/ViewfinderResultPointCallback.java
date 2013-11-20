@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package com.jingle.zxing.view;
+package com.google.zxing.client.android;
 
 import com.google.zxing.ResultPoint;
 import com.google.zxing.ResultPointCallback;
 
-public final class ViewfinderResultPointCallback implements ResultPointCallback {
+final class ViewfinderResultPointCallback implements ResultPointCallback {
 
-  private final ViewfinderView viewfinderView;
+	private final ViewfinderView viewfinderView;
 
-  public ViewfinderResultPointCallback(ViewfinderView viewfinderView) {
-    this.viewfinderView = viewfinderView;
-  }
+	ViewfinderResultPointCallback(ViewfinderView viewfinderView) {
+		this.viewfinderView = viewfinderView;
+	}
 
-  public void foundPossibleResultPoint(ResultPoint point) {
-    viewfinderView.addPossibleResultPoint(point);
-  }
+	@Override
+	public void foundPossibleResultPoint(ResultPoint point) {
+		viewfinderView.addPossibleResultPoint(point);
+	}
 
 }
